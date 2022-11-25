@@ -1,18 +1,16 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import registerImg from '../../../assets/images/register.jpg';
+import img from '../../../assets/images/image.jpg';
 import { AuthContext } from '../../../context/AuthProvider';
 import { useForm } from "react-hook-form";
 import toast from 'react-hot-toast';
-
-
 
 const Register = () => {
     const { createUser, updateUser } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
 
-    const handleSignUp = data => {
+    const handleRegister = data => {
         createUser(data.email, data.password)
             .then(() => {
                 toast.success('User created successfully!')
@@ -30,15 +28,14 @@ const Register = () => {
     }
 
 
-
     return (
         <div className=" bg-sky-200 p-8 lg:p-20 ">
             <div className="p-0 hero-content flex flex-col lg:flex-row justify-center items-center rounded-md">
                 <div className='w-full lg:w-3/5'>
-                    <img src={registerImg} alt='' className="rounded-2xl" />
+                    <img src={img} alt='' className="rounded-2xl" />
                 </div>
                 <div className='w-full p-10 lg:w-2/5 h-[550px] flex flex-col justify-center items-center bg-base-100'>
-                    <form onSubmit={handleSubmit(handleSignUp)} className="w-full mx-auto">
+                    <form onSubmit={handleSubmit(handleRegister)} className="w-full mx-auto">
                         <h1 className="text-3xl font-bold text-center">Register now!</h1>
                         <div className="form-control w-full">
 

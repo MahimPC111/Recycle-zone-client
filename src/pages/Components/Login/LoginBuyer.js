@@ -1,12 +1,13 @@
 import React from 'react';
 
-const BuyerLogin = () => {
+const LoginBuyer = () => {
     return (
         <div>
-            buyer login
+            login buyer
+
             <p>google login</p>
         </div>
     );
 };
 
-export default BuyerLogin;
+export default LoginBuyer;

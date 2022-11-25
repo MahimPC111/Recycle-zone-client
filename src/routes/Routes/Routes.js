@@ -7,6 +7,7 @@ import Login from "../../pages/Components/Login/Login";
 import LoginBuyer from "../../pages/Components/Login/LoginBuyer";
 import LoginSeller from "../../pages/Components/Login/LoginSeller";
 import MyProducts from "../../pages/Components/MyProducts/MyProducts";
+import Products from "../../pages/Components/Products/Products";
 import Register from "../../pages/Components/Register/Register";
 
 export const router = createBrowserRouter([
@@ -17,6 +18,11 @@ export const router = createBrowserRouter([
             {
                 path: '/',
                 element: <Home></Home>
+            },
+            {
+                path: '/category/:id',
+                loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`),
+                element: <Products></Products>
             },
             {
                 path: '/blogs',

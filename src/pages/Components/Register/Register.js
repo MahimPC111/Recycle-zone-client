@@ -24,12 +24,14 @@ const Register = () => {
                 }
                 updateUser(userInfo)
                     .then(() => {
-                        setLoading(false);
                         saveUser(data.name, data.email, data.role)
                     })
                     .catch(e => toast.error(e.message))
             })
-            .catch(e => toast.error(e.message))
+            .catch(e => {
+                toast.error(e.message)
+                navigate('/register')
+            })
     }
 
     const saveUser = (name, email, role) => {
@@ -44,8 +46,8 @@ const Register = () => {
             body: JSON.stringify(user)
         })
             .then(res => res.json())
-            .then(data => {
-                console.log(data)
+            .then(() => {
+                setLoading(false);
                 toast.success('User created successfully!')
                 navigate('/');
             })

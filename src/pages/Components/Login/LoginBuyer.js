@@ -31,12 +31,29 @@ const LoginBuyer = () => {
 
     const handleGoogleLogin = (provider) => {
         signInWithGoogle(provider)
+            .then((result) => {
+                const user = result.user;
+                saveUser(user.displayName, user.email)
+            })
+            .catch(e => toast.error(e.message))
+    }
+
+    const saveUser = (name, email) => {
+        const user = {
+            name,
+            email
+        }
+        fetch('http://localhost:5000/users', {
+            method: 'PUT',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
             .then(() => {
                 toast.success('User Logged in successfully!')
                 navigate('/');
                 setLoading(false);
             })
-            .catch(e => toast.error(e.message))
     }
 
     return (

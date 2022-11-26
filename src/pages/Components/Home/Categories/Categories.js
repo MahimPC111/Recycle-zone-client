@@ -4,7 +4,7 @@ import Category from './Category';
 import Loader from '../../../../shortComponents/Loader';
 
 const Categories = () => {
-    const { data: categories, isLoading } = useQuery({
+    const { data: categories = [], isLoading } = useQuery({
         queryKey: ['categories'],
         queryFn: async () => {
             const res = await fetch('http://localhost:5000/categories');

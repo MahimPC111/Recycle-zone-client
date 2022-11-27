@@ -11,7 +11,6 @@ const AddProduct = () => {
     const navigate = useNavigate();
     const date = format(new Date(), 'PPP');
     const imgHostingKey = process.env.REACT_APP_imgbb_key;
-    console.log(imgHostingKey)
 
     const handleAddDoctor = data => {
         const image = data.img[0];
@@ -41,8 +40,6 @@ const AddProduct = () => {
                         seller_name: user?.displayName,
                         img: imgData.data.url
                     }
-
-                    console.log(product)
 
                     fetch(`http://localhost:5000/products`, {
                         method: 'POST',
@@ -161,5 +158,3 @@ const AddProduct = () => {
 };
 
 export default AddProduct;
-
-// On the " Add A Product" route, create a form that will have fields for product name, price, condition type(excellent, good, fair), mobile number, location (Chittagong, Dhaka, etc.), product category (every product should be under a category), description, price, Year of purchase and other relevant information. After submitting the form, a modal/toast with a message will pop up to inform the user. Please remember, they must be a seller to add a product (think about the verification process for the admin access). After adding the product, you will then be redirected to the My Products Page.

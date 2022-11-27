@@ -1,21 +1,18 @@
-import React from 'react';
-import { useQuery } from '@tanstack/react-query';
+import Axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import Category from './Category';
-import Loader from '../../../../shortComponents/Loader';
+
 
 const Categories = () => {
-    const { data: categories = [], isLoading } = useQuery({
-        queryKey: ['categories'],
-        queryFn: async () => {
-            const res = await fetch('http://localhost:5000/categories');
-            const data = await res.json();
-            return data
-        }
-    })
+    const [categories, setCategories] = useState([]);
 
-    if (isLoading) {
-        return <Loader></Loader>
-    }
+    useEffect(() => {
+        Axios.get('http://localhost:5000/categories')
+            .then(res => {
+                setCategories(res.data)
+            })
+    }, [])
+
 
     return (
         <div>

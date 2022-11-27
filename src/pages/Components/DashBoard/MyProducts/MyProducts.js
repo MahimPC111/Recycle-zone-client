@@ -6,6 +6,7 @@ import Loader from '../../../../shortComponents/Loader';
 
 const MyProducts = () => {
     const { user } = useContext(AuthContext);
+    // const [isAdvertised, setIsAdvertised] = useState(false);
 
     const { data: products = [], isLoading, refetch } = useQuery({
         queryKey: ['orders', user?.email],
@@ -27,6 +28,25 @@ const MyProducts = () => {
             .then(res => res.json())
             .then(() => {
                 toast.success('Deleted successfully')
+                refetch();
+            })
+    }
+
+    const handleAdvertise = (id) => {
+        const advertise = {
+            isAdvertised: true,
+        }
+        fetch(`http://localhost:5000/products/${id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(advertise)
+        })
+            .then(res => res.json())
+            .then((result) => {
+                console.log(result)
+                toast.success('Product advertised successfully')
                 refetch();
             })
     }
@@ -57,7 +77,9 @@ const MyProducts = () => {
                                 <td>{product.resale_price}</td>
                                 <td>{product.status}</td>
                                 <td><button onClick={() => handleDelete(product._id)} className='btn btn-sm btn-error'>X</button></td>
-                                <td><button className='btn btn-sm btn-primary'>Advertise</button></td>
+                                <td><button onClick={() => handleAdvertise(product._id)} className='btn btn-sm btn-primary' disabled={product.isAdvertised}>
+                                    {product.isAdvertised ? 'Advertised' : 'Advertise'}
+                                </button></td>
                             </tr>
                         )
                     }
@@ -68,5 +90,3 @@ const MyProducts = () => {
 };
 
 export default MyProducts;
-
-// Please note there will be a special button for each unsold/available product where the seller can hit the button to advertise

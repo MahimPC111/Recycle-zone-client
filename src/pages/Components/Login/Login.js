@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import './login.css'
 
 const Login = () => {
+    // const location = useLocation();
+    // const from = location.state.from.path || '/';
 
     return (
         <div className='bgImg flex items-center py-20 lg:py-28'>

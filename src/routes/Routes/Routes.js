@@ -11,6 +11,7 @@ import Login from "../../pages/Components/Login/Login";
 import LoginBuyer from "../../pages/Components/Login/LoginBuyer";
 import LoginSeller from "../../pages/Components/Login/LoginSeller";
 import Register from "../../pages/Components/Register/Register";
+import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 
 export const router = createBrowserRouter([
     {
@@ -46,15 +47,11 @@ export const router = createBrowserRouter([
                 path: '/register',
                 element: <Register></Register>
             },
-            {
-                path: '/dashboard',
-                element: <Blogs></Blogs>
-            },
         ]
     },
     {
         path: '/dashboard',
-        element: <DashboardLayout></DashboardLayout>,
+        element: <PrivateRoutes><DashboardLayout></DashboardLayout></PrivateRoutes>,
         children: [
             {
                 path: '/dashboard',

@@ -16,8 +16,8 @@ const Product = ({ product, setSelectedProduct, currentUser }) => {
             <figure><img src={img} alt={name} /></figure>
             <div className="card-body">
                 <h2 className="card-title">{name}</h2>
-                <p>Original price: {original_price} BDT</p>
-                <p>Resale price: {resale_price}</p>
+                <p>Original price: <del>{original_price}</del> BDT</p>
+                <p>Resale price: {resale_price} BDT</p>
                 <p>Usages time: {used_time}</p>
                 <p>Seller name: {seller_name}</p>
                 <p>Published date: {published_date}</p>

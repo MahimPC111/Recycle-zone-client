@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../context/AuthProvider';
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import img from '../../../assets/images/image.jpg';
 
@@ -9,14 +9,15 @@ const LoginSeller = () => {
     const { logInUser, setLoading } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
-
+    const location = useLocation();
+    const from = location?.state?.from?.pathname || '/';
 
     const handleLogin = data => {
         logInUser(data.email, data.password)
             .then(() => {
                 toast.success('User created successfully!')
                 setLoading(false);
-                navigate('/')
+                navigate(from, { replace: true })
             })
             .catch(e => toast.error(e.message))
     }

@@ -1,7 +1,18 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import bluetick from '../../../../assets/Logo/bluetick.png'
 
 const Product = ({ product, setSelectedProduct, currentUser }) => {
-    const { name, img, location, original_price, resale_price, used_time, published_date, seller_name } = product;
+    const { name, img, location, original_price, resale_price, used_time, published_date, seller_name, email } = product;
+
+    const { data: seller = [] } = useQuery({
+        queryKey: ['users', email],
+        queryFn: async () => {
+            const res = await fetch(`http://localhost:5000/users/${email}`)
+            const data = await res.json()
+            return data;
+        }
+    })
 
     const modalInfo = {
         buyer: currentUser.name,
@@ -19,7 +30,11 @@ const Product = ({ product, setSelectedProduct, currentUser }) => {
                 <p>Original price: <del>{original_price}</del> BDT</p>
                 <p>Resale price: {resale_price} BDT</p>
                 <p>Usages time: {used_time}</p>
-                <p>Seller name: {seller_name}</p>
+                <p className='flex items-center'>Seller name: {seller_name}
+                    {
+                        seller.isVerified && <img src={bluetick} className='w-5 h-5 ml-1' alt='' />
+                    }
+                </p>
                 <p>Published date: {published_date}</p>
                 <p>Location: {location}</p>
                 <div className="card-actions justify-end">

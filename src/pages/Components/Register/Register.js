@@ -9,24 +9,38 @@ const Register = () => {
     const { createUser, updateUser, setLoading } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
-
+    const imgHostingKey = process.env.REACT_APP_imgbb_key;
 
     const handleRegister = data => {
-        createUser(data.email, data.password)
-            .then(() => {
-                const userInfo = {
-                    displayName: data.name,
-                    photoURL: data.photoURL
+
+        const image = data.img[0];
+        const formData = new FormData();
+        formData.append('image', image);
+        fetch(`https://api.imgbb.com/1/upload?key=${imgHostingKey}`, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(imgData => {
+                if (imgData.success) {
+
+                    createUser(data.email, data.password)
+                        .then(() => {
+                            const userInfo = {
+                                displayName: data.name,
+                                photoURL: imgData.data.url,
+                            }
+                            updateUser(userInfo)
+                                .then(() => {
+                                    saveUser(data.name, data.email, data.role)
+                                })
+                                .catch(e => toast.error(e.message))
+                        })
+                        .catch(e => {
+                            toast.error(e.message)
+                            navigate('/register')
+                        })
                 }
-                updateUser(userInfo)
-                    .then(() => {
-                        saveUser(data.name, data.email, data.role)
-                    })
-                    .catch(e => toast.error(e.message))
-            })
-            .catch(e => {
-                toast.error(e.message)
-                navigate('/register')
             })
     }
 
@@ -71,10 +85,10 @@ const Register = () => {
 
                         <div className="form-control w-full">
                             <label className="label">
-                                <span className="label-text">Photo URL</span>
+                                <span className="label-text">Photo</span>
                             </label>
-                            <input {...register("photoURL", { required: "Photo URL is required" })} type="text" className="input input-bordered w-full" />
-                            {errors.photoURL && <p className='text-red-600'>{errors.photoURL?.message}</p>}
+                            <input {...register("img", { required: "Image is required" })} type="file" className="input input-bordered w-full" />
+                            {errors.img && <p className='text-red-600'>{errors.img?.message}</p>}
                         </div>
 
                         <div className="form-control w-full">
@@ -99,14 +113,14 @@ const Register = () => {
                             {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}
                         </div>
 
-                        <div className="form-control w-full py-2">
+                        <div className="form-control w-full py-3">
                             <select {...register("role")} className="input input-bordered w-full" required>
                                 <option value="buyer">Buyer</option>
                                 <option value="seller">Seller</option>
                             </select>
                         </div>
 
-                        <input value='SignUp' className='btn w-full mt-4' type="submit" />
+                        <input value='Register' className='btn w-full mt-2' type="submit" />
                     </form>
                     <p className='text-xs text-center mt-4'>Already have account? <Link to='/login' className='text-blue-500'>Login</Link></p>
                 </div>

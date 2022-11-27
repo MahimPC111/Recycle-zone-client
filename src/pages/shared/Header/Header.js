@@ -9,6 +9,8 @@ const Header = () => {
     const { user, logOutUser } = useContext(AuthContext);
     const navigate = useNavigate();
 
+
+
     const handleSignOut = () => {
         logOutUser()
             .then(() => {
@@ -20,7 +22,9 @@ const Header = () => {
     const menuBar =
         <>
             <Link className='font-semibold my-2 lg:my-0 mx-2' to='/'>Home</Link>
-            <Link className='font-semibold my-2 lg:my-0 mx-2' to='/dashboard'>Dashboard</Link>
+            {
+                user && <Link className='font-semibold my-2 lg:my-0 mx-2' to='/dashboard'>Dashboard</Link>
+            }
             <Link className='font-semibold my-2 lg:my-0 mx-2' to='/blogs'>Blogs</Link>
             {
                 user?.uid ?
@@ -41,7 +45,7 @@ const Header = () => {
                 <Link to='/'><h2 className="font-bold normal-case pl-4 text-2xl lg:text-3xl whitespace-nowrap">Recycle Zone</h2></Link>
             </div>
             <div className="navbar-end">
-                <div className="hidden lg:flex">
+                <div className="hidden lg:flex items-center">
                     {menuBar}
                 </div>
                 <label htmlFor="dashboard-drawer" tabIndex={2} className="btn btn-ghost lg:hidden">

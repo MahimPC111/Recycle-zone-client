@@ -5,16 +5,30 @@ const Advertise = () => {
     const { data: products = [] } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/products?advertise=${true}`)
+            const res = await fetch('http://localhost:5000/products/isAdvertised')
             const data = await res.json()
             return data;
         }
     })
 
-    console.log(products)
     return (
-        <div>
-
+        <div className='my-10'>
+            {
+                products.length &&
+                <div>
+                    <h3 className='text-xl md:text-2xl lg:text-3xl font-bold font-serif text-center'>Advertised items are available now!!</h3>
+                    <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 my-5'>
+                        {
+                            products.map(product =>
+                                <div className='mx-auto'>
+                                    <img src={product.img} className='w-48 h-48' alt="" />
+                                    <h3 className='text-center text-lg font-sans font-bold'>{product.name}</h3>
+                                </div>
+                            )
+                        }
+                    </div>
+                </div>
+            }
         </div>
     );
 };

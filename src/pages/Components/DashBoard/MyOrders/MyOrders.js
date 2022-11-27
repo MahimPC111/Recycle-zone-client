@@ -6,7 +6,7 @@ import Loader from '../../../../shortComponents/Loader';
 const MyOrders = () => {
     const { user } = useContext(AuthContext);
 
-    const { data: orders = [], isLoading, refetch } = useQuery({
+    const { data: orders = [], isLoading } = useQuery({
         queryKey: ['orders', user?.email],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/orders?email=${user?.email}`)
@@ -14,7 +14,6 @@ const MyOrders = () => {
             return data;
         }
     })
-    console.log(orders)
 
     if (isLoading) {
         return <Loader></Loader>
@@ -35,7 +34,7 @@ const MyOrders = () => {
                 <tbody>
                     {
                         orders.length && orders.map((order, i) =>
-                            <tr>
+                            <tr key={i}>
                                 <th>{i + 1}</th>
                                 <td>
                                     <img className='w-12 h-12' src={order.img} alt='' />

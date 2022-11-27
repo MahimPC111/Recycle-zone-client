@@ -4,16 +4,12 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import img from '../../../assets/images/image.jpg';
-import Loader from '../../../shortComponents/Loader';
 
 const LoginSeller = () => {
-    const { logInUser, loading, setLoading } = useContext(AuthContext);
+    const { logInUser, setLoading } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
 
-    if (loading) {
-        return <Loader></Loader>
-    }
 
     const handleLogin = data => {
         logInUser(data.email, data.password)

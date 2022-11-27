@@ -1,13 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
+import DashboardLayout from "../../layouts/DashboardLayout";
 import Main from "../../layouts/Main";
-import AddProduct from "../../pages/Components/AddProduct/AddProduct";
 import Blogs from "../../pages/Components/Blogs/Blogs";
+import AddProduct from "../../pages/Components/DashBoard/AddProduct/AddProduct";
+import MyOrders from "../../pages/Components/DashBoard/MyOrders/MyOrders";
+import MyProducts from "../../pages/Components/DashBoard/MyProducts/MyProducts";
 import Home from "../../pages/Components/Home/Home/Home";
+import Products from "../../pages/Components/Home/Products/Products";
 import Login from "../../pages/Components/Login/Login";
 import LoginBuyer from "../../pages/Components/Login/LoginBuyer";
 import LoginSeller from "../../pages/Components/Login/LoginSeller";
-import MyProducts from "../../pages/Components/MyProducts/MyProducts";
-import Products from "../../pages/Components/Products/Products";
 import Register from "../../pages/Components/Register/Register";
 
 export const router = createBrowserRouter([
@@ -29,14 +31,6 @@ export const router = createBrowserRouter([
                 element: <Blogs></Blogs>
             },
             {
-                path: '/addProduct',
-                element: <AddProduct></AddProduct>
-            },
-            {
-                path: '/myProducts',
-                element: <MyProducts></MyProducts>
-            },
-            {
                 path: '/login',
                 element: <Login></Login>,
             },
@@ -55,6 +49,24 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard',
                 element: <Blogs></Blogs>
+            },
+        ]
+    },
+    {
+        path: '/dashboard',
+        element: <DashboardLayout></DashboardLayout>,
+        children: [
+            {
+                path: '/dashboard',
+                element: <MyOrders></MyOrders>
+            },
+            {
+                path: '/dashboard/addProduct',
+                element: <AddProduct></AddProduct>
+            },
+            {
+                path: '/dashboard/myProducts',
+                element: <MyProducts></MyProducts>
             },
         ]
     }

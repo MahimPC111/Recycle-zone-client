@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import img from '../../../assets/Logo/logo.png'
 import { AuthContext } from '../../../context/AuthProvider';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -7,11 +7,12 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => {
     const { user, logOutUser } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleSignOut = () => {
         logOutUser()
             .then(() => {
-                localStorage.removeItem('eatWellToken')
+                navigate('/login')
             })
             .catch(e => console.error(e))
     }
@@ -19,8 +20,6 @@ const Header = () => {
     const menuBar =
         <>
             <Link className='font-semibold my-2 lg:my-0 mx-2' to='/'>Home</Link>
-            <Link className='font-semibold my-2 lg:my-0 mx-2 whitespace-nowrap' to='/addProduct'>Add Product</Link>
-            <Link className='font-semibold my-2 lg:my-0 mx-2 whitespace-nowrap' to='/myProducts'>My Products</Link>
             <Link className='font-semibold my-2 lg:my-0 mx-2' to='/dashboard'>Dashboard</Link>
             <Link className='font-semibold my-2 lg:my-0 mx-2' to='/blogs'>Blogs</Link>
             {
@@ -45,6 +44,9 @@ const Header = () => {
                 <div className="hidden lg:flex">
                     {menuBar}
                 </div>
+                <label htmlFor="dashboard-drawer" tabIndex={2} className="btn btn-ghost lg:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+                </label>
                 <div className="dropdown dropdown-end">
                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                         <div className="w-10 rounded-full">

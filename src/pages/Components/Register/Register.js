@@ -4,16 +4,12 @@ import img from '../../../assets/images/image.jpg';
 import { AuthContext } from '../../../context/AuthProvider';
 import { useForm } from "react-hook-form";
 import toast from 'react-hot-toast';
-import Loader from '../../../shortComponents/Loader';
 
 const Register = () => {
-    const { createUser, updateUser, loading, setLoading } = useContext(AuthContext);
+    const { createUser, updateUser, setLoading } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
 
-    if (loading) {
-        return <Loader></Loader>
-    }
 
     const handleRegister = data => {
         createUser(data.email, data.password)

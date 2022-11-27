@@ -6,18 +6,12 @@ import toast from 'react-hot-toast';
 import img from '../../../assets/images/image.jpg';
 import icon from '../../../assets/Logo/google.png';
 import { GoogleAuthProvider } from 'firebase/auth';
-import Loader from '../../../shortComponents/Loader';
 
 const LoginBuyer = () => {
-    const { logInUser, signInWithGoogle, loading, setLoading } = useContext(AuthContext);
+    const { logInUser, signInWithGoogle, setLoading } = useContext(AuthContext);
     const provider = new GoogleAuthProvider();
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
-
-
-    if (loading) {
-        return <Loader></Loader>
-    }
 
     const handleLogin = data => {
         logInUser(data.email, data.password)

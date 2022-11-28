@@ -13,6 +13,7 @@ const AddProduct = () => {
     const imgHostingKey = process.env.REACT_APP_imgbb_key;
 
     const handleAddDoctor = data => {
+        console.log(data.categoryId)
         const image = data.img[0];
         const formData = new FormData();
         formData.append('image', image);
@@ -75,12 +76,12 @@ const AddProduct = () => {
 
                     <div className="form-control w-full">
                         <label className="label">
-                            <span className="label-text">Category ID</span>
+                            <span className="label-text">Product Category</span>
                         </label>
                         <select {...register("categoryId")} className="input input-bordered w-full" required>
-                            <option value="01">01</option>
-                            <option value="02">02</option>
-                            <option value="03">03</option>
+                            <option value="01">Feature phones</option>
+                            <option value="02">Smartphones</option>
+                            <option value="03">Tablet</option>
                         </select>
                     </div>
 

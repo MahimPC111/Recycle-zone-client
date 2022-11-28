@@ -10,9 +10,8 @@ import MyProducts from "../../pages/Components/DashBoard/MyProducts/MyProducts";
 import Home from "../../pages/Components/Home/Home/Home";
 import Products from "../../pages/Components/Home/Products/Products";
 import Login from "../../pages/Components/Login/Login";
-import LoginBuyer from "../../pages/Components/Login/LoginBuyer";
-import LoginSeller from "../../pages/Components/Login/LoginSeller";
 import Register from "../../pages/Components/Register/Register";
+import Route404 from "../../pages/Components/Route404/Route404";
 import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 
 export const router = createBrowserRouter([
@@ -27,7 +26,7 @@ export const router = createBrowserRouter([
             {
                 path: '/category/:id',
                 loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`),
-                element: <Products></Products>
+                element: <PrivateRoutes> <Products></Products></PrivateRoutes>
             },
             {
                 path: '/blogs',
@@ -36,14 +35,6 @@ export const router = createBrowserRouter([
             {
                 path: '/login',
                 element: <Login></Login>,
-            },
-            {
-                path: '/login/loginBuyer',
-                element: <LoginBuyer></LoginBuyer>
-            },
-            {
-                path: '/login/loginSeller',
-                element: <LoginSeller></LoginSeller>
             },
             {
                 path: '/register',
@@ -76,5 +67,9 @@ export const router = createBrowserRouter([
                 element: <AllBuyers></AllBuyers>
             },
         ]
+    },
+    {
+        path: '*',
+        element: <Route404></Route404>
     }
 ])

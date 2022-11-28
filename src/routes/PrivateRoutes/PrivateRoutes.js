@@ -4,19 +4,18 @@ import { AuthContext } from '../../context/AuthProvider';
 import Loader from '../../shortComponents/Loader';
 
 const PrivateRoutes = ({ children }) => {
-    const location = useLocation();
-
     const { user, loading } = useContext(AuthContext);
+    const location = useLocation();
 
     if (loading) {
         return <Loader></Loader>
     }
 
-    if (!user) {
-        return <Navigate to='/login/loginBuyer' state={{ from: location }} replace></Navigate>
+    if (user) {
+        return children;
     }
 
-    return children;
+    return <Navigate to='/login' state={{ from: location }} replace></Navigate>
 };
 
 export default PrivateRoutes;

@@ -24,7 +24,7 @@ const Product = ({ product, setSelectedProduct, currentUser }) => {
 
     return (
         <div className="card w-96 bg-base-100 shadow-lg mx-auto">
-            <figure><img src={img} alt={name} /></figure>
+            <figure><img className='w-[225px] h-[225px]' src={img} alt={name} /></figure>
             <div className="card-body">
                 <h2 className="card-title">{name}</h2>
                 <p>Original price: <del>{original_price}</del> BDT</p>
@@ -38,11 +38,11 @@ const Product = ({ product, setSelectedProduct, currentUser }) => {
                 <p>Published date: {published_date}</p>
                 <p>Location: {location}</p>
                 <div className="card-actions justify-end">
-                    <label onClick={() => setSelectedProduct(modalInfo)} htmlFor="booking-product" className="btn btn-primary" disabled={currentUser.role === 'seller' || currentUser.role === 'admin'}>Book now</label>
+                    <label onClick={() => setSelectedProduct(modalInfo)} htmlFor="booking-product" className="btn btn-primary" disabled={currentUser.role !== 'buyer'}>Book now</label>
                 </div>
             </div>
         </div>
     );
 };
-
+// 'seller' || currentUser.role === 'admin'
 export default Product;

@@ -19,8 +19,8 @@ const Advertise = () => {
                     <h3 className='text-xl md:text-2xl lg:text-3xl font-bold font-serif text-center'>Advertised items are available now!!</h3>
                     <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 my-5'>
                         {
-                            products.map(product =>
-                                <div className='mx-auto'>
+                            products.map((product, i) =>
+                                <div key={i} className='mx-auto'>
                                     <img src={product.img} className='w-48 h-48' alt="" />
                                     <h3 className='text-center text-lg font-sans font-bold'>{product.name}</h3>
                                 </div>

@@ -4,32 +4,19 @@ import img from '../../../assets/images/image.jpg';
 import { AuthContext } from '../../../context/AuthProvider';
 import { useForm } from "react-hook-form";
 import toast from 'react-hot-toast';
-// import { useQuery } from '@tanstack/react-query';
+import Loader from '../../../shortComponents/Loader';
 
 const Register = () => {
-    const { createUser, updateUser, setLoading } = useContext(AuthContext);
+    const { createUser, updateUser, setLoading, loading } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const imgHostingKey = process.env.REACT_APP_imgbb_key;
 
-    // const { data: usersEmail = [] } = useQuery({
-    //     queryKey: ['usersEmail'],
-    //     queryFn: async () => {
-    //         const res = await fetch('http://localhost:5000/usersEmail')
-    //         const data = await res.json()
-    //         return data;
-    //     }
-    // })
-
+    if (loading) {
+        return <Loader></Loader>
+    }
 
     const handleRegister = data => {
-
-        // usersEmail.forEach(user => {
-        //     if (data.email === user.email) {
-        //         toast.error('This email is already registered')
-        //         return;
-        //     }
-        // })
 
         const image = data.img[0];
         const formData = new FormData();

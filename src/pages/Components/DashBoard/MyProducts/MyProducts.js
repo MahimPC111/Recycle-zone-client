@@ -6,7 +6,6 @@ import Loader from '../../../../shortComponents/Loader';
 
 const MyProducts = () => {
     const { user } = useContext(AuthContext);
-    // const [isAdvertised, setIsAdvertised] = useState(false);
 
     const { data: products = [], isLoading, refetch } = useQuery({
         queryKey: ['orders', user?.email],
@@ -44,8 +43,7 @@ const MyProducts = () => {
             body: JSON.stringify(advertise)
         })
             .then(res => res.json())
-            .then((result) => {
-                console.log(result)
+            .then(() => {
                 toast.success('Product advertised successfully')
                 refetch();
             })
@@ -55,33 +53,41 @@ const MyProducts = () => {
         <div className="overflow-x-auto">
             <table className="table w-full">
                 <thead>
-                    <tr>
-                        <th></th>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Status</th>
-                        <th>Advertise</th>
-                        <th>Delete</th>
-                    </tr>
+                    {
+                        products.length ?
+                            <tr>
+                                <th></th>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                                <th>Advertise</th>
+                                <th>Delete</th>
+                            </tr>
+                            :
+                            <h2 className='text-xl md:text-2xl lg:text-4xl text-center font-semibold my-4'>You haven't added any product yet</h2>
+                    }
                 </thead>
                 <tbody>
                     {
-                        products.length && products.map((product, i) =>
-                            <tr key={i}>
-                                <th>{i + 1}</th>
-                                <td>
-                                    <img className='w-12 h-12' src={product.img} alt='' />
-                                </td>
-                                <td>{product.name}</td>
-                                <td>{product.resale_price}</td>
-                                <td>{product.status}</td>
-                                <td><button onClick={() => handleAdvertise(product._id)} className='btn btn-sm btn-primary' disabled={product.isAdvertised}>
-                                    {product.isAdvertised ? 'Advertised' : 'Advertise'}
-                                </button></td>
-                                <td><button onClick={() => handleDelete(product._id)} className='btn btn-sm btn-error'>X</button></td>
-                            </tr>
-                        )
+                        products.length ?
+                            products.map((product, i) =>
+                                <tr key={i}>
+                                    <th>{i + 1}</th>
+                                    <td>
+                                        <img className='w-12 h-12' src={product.img} alt='' />
+                                    </td>
+                                    <td>{product.name}</td>
+                                    <td>{product.resale_price}</td>
+                                    <td>{product.status}</td>
+                                    <td><button onClick={() => handleAdvertise(product._id)} className='btn btn-sm btn-primary' disabled={product.isAdvertised}>
+                                        {product.isAdvertised ? 'Advertised' : 'Advertise'}
+                                    </button></td>
+                                    <td><button onClick={() => handleDelete(product._id)} className='btn btn-sm btn-error'>X</button></td>
+                                </tr>
+                            )
+                            :
+                            <h2 className='text-lg md:text-xl lg:text-2xl text-center font-semibold my-2'>You have to add at least one product to checkout your product list.</h2>
                     }
                 </tbody>
             </table>

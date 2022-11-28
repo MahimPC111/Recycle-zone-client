@@ -1,14 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import toast from 'react-hot-toast';
 import bluetick from '../../../../assets/Logo/bluetick.png'
 
 const Product = ({ product, setSelectedProduct, currentUser }) => {
-    const { name, img, location, original_price, resale_price, used_time, published_date, seller_name, email } = product;
+    const { name, img, location, original_price, resale_price, used_time, published_date, seller_name, seller_email } = product;
 
     const { data: seller = [] } = useQuery({
-        queryKey: ['users', email],
+        queryKey: ['users', seller_email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/users/${email}`)
+            const res = await fetch(`http://localhost:5000/users/${seller_email}`)
             const data = await res.json()
             return data;
         }
@@ -19,7 +20,27 @@ const Product = ({ product, setSelectedProduct, currentUser }) => {
         email: currentUser.email,
         item: name,
         price: resale_price,
-        img
+        img,
+        seller_email
+    }
+
+    const handleReportedItem = (product) => {
+        const reportedProduct = {
+            productId: product._id,
+            productName: product.name,
+            image: product.img
+        }
+        fetch(`http://localhost:5000/reportedItems`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(reportedProduct)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    toast.success('Item reported successfully')
+                }
+            })
     }
 
     return (
@@ -37,7 +58,8 @@ const Product = ({ product, setSelectedProduct, currentUser }) => {
                 </p>
                 <p>Published date: {published_date}</p>
                 <p>Location: {location}</p>
-                <div className="card-actions justify-end">
+                <div className="card-actions justify-between items-center mt-2">
+                    <label onClick={() => handleReportedItem(product)} className="btn btn-primary btn-sm" disabled={currentUser.role !== 'buyer'}>Report to Admin</label>
                     <label onClick={() => setSelectedProduct(modalInfo)} htmlFor="booking-product" className="btn btn-primary" disabled={currentUser.role !== 'buyer'}>Book now</label>
                 </div>
             </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import toast from 'react-hot-toast';
 
 const BookNow = ({ selectedProduct, setSelectedProduct, refetch }) => {
-    const { buyer, email, item, price, img } = selectedProduct;
+    const { buyer, email, item, price, img, seller_email } = selectedProduct;
 
 
     const handleSubmit = event => {
@@ -22,7 +22,8 @@ const BookNow = ({ selectedProduct, setSelectedProduct, refetch }) => {
             price,
             img,
             phone,
-            location
+            location,
+            seller_email
         }
 
         fetch('http://localhost:5000/orders', {

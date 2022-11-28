@@ -13,7 +13,6 @@ const AddProduct = () => {
     const imgHostingKey = process.env.REACT_APP_imgbb_key;
 
     const handleAddDoctor = data => {
-        console.log(data.categoryId)
         const image = data.img[0];
         const formData = new FormData();
         formData.append('image', image);

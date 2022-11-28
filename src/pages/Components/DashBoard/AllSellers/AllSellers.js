@@ -37,8 +37,7 @@ const AllSellers = () => {
             body: JSON.stringify(verify)
         })
             .then(res => res.json())
-            .then((result) => {
-                console.log(result)
+            .then(() => {
                 toast.success('Seller verified successfully')
                 refetch();
             })

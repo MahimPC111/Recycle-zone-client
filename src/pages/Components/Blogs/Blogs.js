@@ -3,6 +3,7 @@ import React from 'react';
 const Blogs = () => {
     return (
         <div>
+            <h1 className='text-2xl md:text-3xl lg:text-4xl text-center my-4'>This is our popular blogs you should not miss.</h1>
             <div className='m-8 lg:m-10 p-6 lg:p-16 rounded-lg bg-blue-200'>
                 <p className='text-xl font-bold lg:text-2xl mb-5'>1) What are the different ways to manage a state in a React application?</p>
                 <p><span className='font-bold'>Different ways to handle state in React applications:</span> <br />

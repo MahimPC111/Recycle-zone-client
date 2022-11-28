@@ -1,6 +1,6 @@
 .bg404 {
     background-image: url('../../../assets/route404/404-page.png');
-    background-size: 100%;
+    background-size: cover;
     height: 100vh;
 }
 

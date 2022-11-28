@@ -48,7 +48,7 @@ const Product = ({ product, setSelectedProduct, currentUser }) => {
             <figure><img className='w-[225px] h-[225px]' src={img} alt={name} /></figure>
             <div className="card-body">
                 <h2 className="card-title">{name}</h2>
-                <p>Original price: <del>{original_price}</del> BDT</p>
+                <p>Original price: $<del>{original_price}</del></p>
                 <p>Resale price: {resale_price} BDT</p>
                 <p>Usages time: {used_time}</p>
                 <p className='flex items-center'>Seller name: {seller_name}

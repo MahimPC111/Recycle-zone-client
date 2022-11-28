@@ -55,7 +55,7 @@ const Register = () => {
             email,
             role
         }
-        fetch('http://localhost:5000/users', {
+        fetch('https://recycle-zone-server-ten.vercel.app/users', {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(user)

@@ -11,7 +11,7 @@ const CheckoutForm = ({ order }) => {
     const { _id, price, buyer, email } = order;
 
     useEffect(() => {
-        fetch("http://localhost:5000/create-payment-intent", {
+        fetch("https://recycle-zone-server-ten.vercel.app/create-payment-intent", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -75,7 +75,7 @@ const CheckoutForm = ({ order }) => {
                 email,
             }
 
-            fetch('http://localhost:5000/payments', {
+            fetch('https://recycle-zone-server-ten.vercel.app/payments', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',

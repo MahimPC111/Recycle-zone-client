@@ -15,7 +15,7 @@ const Products = () => {
     const { data: currentUser = [], isLoading, refetch } = useQuery({
         queryKey: ['users', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/users/${user?.email}`)
+            const res = await fetch(`https://recycle-zone-server-ten.vercel.app/users/${user?.email}`)
             const data = await res.json()
             return data;
         }

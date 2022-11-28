@@ -9,7 +9,7 @@ const Product = ({ product, setSelectedProduct, currentUser }) => {
     const { data: seller = [] } = useQuery({
         queryKey: ['users', seller_email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/users/${seller_email}`)
+            const res = await fetch(`https://recycle-zone-server-ten.vercel.app/users/${seller_email}`)
             const data = await res.json()
             return data;
         }
@@ -30,7 +30,7 @@ const Product = ({ product, setSelectedProduct, currentUser }) => {
             productName: product.name,
             image: product.img
         }
-        fetch(`http://localhost:5000/reportedItems`, {
+        fetch(`https://recycle-zone-server-ten.vercel.app/reportedItems`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(reportedProduct)

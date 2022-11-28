@@ -1,6 +1,9 @@
 ## Project name: Recycle Zone
 
-live site link: ""
+live site link: "https://recycle-zone-c9c5c.web.app/"
+
+Admin email: "recycle71@gmail.com"
+password: "Zone7171"
 
 In this project I have used:
 * HTML 

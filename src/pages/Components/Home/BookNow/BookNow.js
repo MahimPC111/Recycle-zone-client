@@ -26,7 +26,7 @@ const BookNow = ({ selectedProduct, setSelectedProduct, refetch }) => {
             seller_email
         }
 
-        fetch('http://localhost:5000/orders', {
+        fetch('https://recycle-zone-server-ten.vercel.app/orders', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

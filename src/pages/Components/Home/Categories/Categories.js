@@ -7,7 +7,7 @@ const Categories = () => {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        Axios.get('http://localhost:5000/categories')
+        Axios.get('https://recycle-zone-server-ten.vercel.app/categories')
             .then(res => {
                 setCategories(res.data)
             })

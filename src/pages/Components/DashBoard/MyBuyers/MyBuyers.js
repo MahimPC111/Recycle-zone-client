@@ -14,7 +14,7 @@ const MyBuyers = () => {
             return data;
         }
     })
-
+    console.log(buyers)
     if (isLoading) {
         return <Loader></Loader>
     }
@@ -58,5 +58,3 @@ const MyBuyers = () => {
 };
 
 export default MyBuyers;
-
-// buyer's phone, name, email address, and location.

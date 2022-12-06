@@ -36,7 +36,7 @@ const AddProduct = () => {
                         location: data.location,
                         status: 'unsold',
                         mobile: data.number,
-                        email: user?.email,
+                        seller_email: user?.email,
                         seller_name: user?.displayName,
                         img: imgData.data.url,
                         isAdvertised: false,

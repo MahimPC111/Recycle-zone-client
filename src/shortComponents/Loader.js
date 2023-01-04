@@ -1,10 +1,13 @@
 import React from 'react';
-import MoonLoader from "react-spinners/ClipLoader";
+import { ScaleLoader } from 'react-spinners';
 
 const Loader = () => {
     return (
-        <div className='text-center my-8'>
-            <MoonLoader color="#36d7b7" size={80} />
+        <div className='text-center my-10 h-screen'>
+            <ScaleLoader
+                color="#414141"
+                width={5}
+            />
         </div>
     );
 };

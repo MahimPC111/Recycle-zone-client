@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../../context/AuthProvider';
 import Loader from '../../../../shortComponents/Loader';
 
@@ -10,7 +10,7 @@ const MyOrders = () => {
     const { data: orders = [], isLoading } = useQuery({
         queryKey: ['orders', user?.email],
         queryFn: async () => {
-            const res = await fetch(`https://recycle-zone-server-ten.vercel.app/orders?email=${user?.email}`)
+            const res = await fetch(`http://localhost:5000/orders?email=${user?.email}`)
             const data = await res.json()
             return data;
         }
@@ -49,14 +49,12 @@ const MyOrders = () => {
                                     <td>{order.item}</td>
                                     <td>{order.price}</td>
                                     <td>
-                                        {/* {
-                                            !order.paid &&
-                                            <Link to={`/dashboard/payment/${order._id}`}><button className='btn btn-sm'>Pay</button></Link>
-                                        }
                                         {
-                                            order.paid && <span className='text-slate-300 font-bold'>Paid</span>
-                                        } */}
-                                        <button className='btn btn-sm'>Pay</button>
+                                            order.paid ?
+                                                <span className='text-slate-300 font-bold'>Paid</span>
+                                                :
+                                                <Link to={`/dashboard/payment/${order._id}`}><button className='btn btn-sm'>Pay</button></Link>
+                                        }
                                     </td>
                                 </tr>
                             )

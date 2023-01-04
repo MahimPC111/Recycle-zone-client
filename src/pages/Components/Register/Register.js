@@ -1,16 +1,26 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import img from '../../../assets/images/image.jpg';
+import registerImg from '../../../assets/images/register.jpg';
 import { AuthContext } from '../../../context/AuthProvider';
 import { useForm } from "react-hook-form";
 import toast from 'react-hot-toast';
 import Loader from '../../../shortComponents/Loader';
+import { useTitle } from '../../../shortComponents/Title';
 
 const Register = () => {
+    useTitle('Register');
     const { createUser, updateUser, setLoading, loading } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const imgHostingKey = process.env.REACT_APP_imgbb_key;
+
+    useEffect(() => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false)
+        }, 1500);
+    }, [setLoading])
+
 
     if (loading) {
         return <Loader></Loader>
@@ -43,7 +53,7 @@ const Register = () => {
                         })
                         .catch(e => {
                             toast.error(e.message)
-                            navigate('/register')
+                            setLoading(false)
                         })
                 }
             })
@@ -55,7 +65,7 @@ const Register = () => {
             email,
             role
         }
-        fetch('https://recycle-zone-server-ten.vercel.app/users', {
+        fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(user)
@@ -70,12 +80,9 @@ const Register = () => {
 
 
     return (
-        <div className=" bg-sky-200 p-8 lg:p-20 ">
-            <div className="p-0 hero-content flex flex-col lg:flex-row justify-center items-center">
-                <div className='w-full lg:w-3/5'>
-                    <img src={img} alt='' className="rounded-2xl" />
-                </div>
-                <div className='w-full p-10 lg:w-2/5 flex flex-col justify-center items-center bg-base-100'>
+        <div className=" bg-sky-200 py-16 md:py-20 lg:p-20">
+            <div className="p-0 hero-content grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 lg:gap-32 rounded-md">
+                <div className='w-11/12 lg:w-full mx-auto p-10 flex flex-col justify-center items-center bg-base-100'>
                     <form onSubmit={handleSubmit(handleRegister)} className="w-full mx-auto">
                         <h1 className="text-3xl font-bold text-center">Register now!</h1>
 
@@ -128,6 +135,9 @@ const Register = () => {
                         <input value='Register' className='btn w-full mt-2' type="submit" />
                     </form>
                     <p className='text-xs text-center mt-4'>Already have account? <Link to='/login' className='text-blue-500'>Login</Link></p>
+                </div>
+                <div className='w-3/4 lg:w-full mx-auto'>
+                    <img src={registerImg} alt='' className="rounded-2xl" />
                 </div>
             </div>
         </div>

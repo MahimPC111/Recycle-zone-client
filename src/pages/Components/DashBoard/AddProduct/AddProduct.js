@@ -1,16 +1,31 @@
 import { format } from 'date-fns';
 import React, { useContext } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../../context/AuthProvider';
+import Loader from '../../../../shortComponents/Loader';
 
 const AddProduct = () => {
     const { user } = useContext(AuthContext)
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate();
     const date = format(new Date(), 'PPP');
     const imgHostingKey = process.env.REACT_APP_imgbb_key;
+
+    useEffect(() => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false)
+        }, 1000);
+    }, [setLoading])
+
+    if (loading) {
+        return <Loader></Loader>
+    }
 
     const handleAddDoctor = data => {
         const image = data.img[0];
@@ -42,7 +57,7 @@ const AddProduct = () => {
                         isAdvertised: false,
                     }
 
-                    fetch(`https://recycle-zone-server-ten.vercel.app/products`, {
+                    fetch(`http://localhost:5000/products`, {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',

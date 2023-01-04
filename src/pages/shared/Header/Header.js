@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import img from '../../../assets/Logo/logo.png'
 import { AuthContext } from '../../../context/AuthProvider';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import './Header.css'
 
 const Header = () => {
     const { user, logOutUser } = useContext(AuthContext);
@@ -21,11 +22,11 @@ const Header = () => {
 
     const menuBar =
         <>
-            <Link className='font-semibold my-2 lg:my-0 mx-2' to='/'>Home</Link>
+            <NavLink className={`font-semibold my-2 lg:my-0 mx-auto lg:mx-2 ${({ isActive }) => isActive ? 'active' : undefined}`} to='/'>Home</NavLink>
             {
-                user && <Link className='font-semibold my-2 lg:my-0 mx-2' to='/dashboard'>Dashboard</Link>
+                user && <NavLink className='font-semibold my-2 lg:my-0 mx-auto lg:mx-2' to='/dashboard'>Dashboard</NavLink>
             }
-            <Link className='font-semibold my-2 lg:my-0 mx-2' to='/blogs'>Blogs</Link>
+            <NavLink className='font-semibold my-2 lg:my-0 mx-auto lg:mx-2' to='/blogs'>Blogs</NavLink>
             {
                 user?.uid ?
                     <>
@@ -33,8 +34,8 @@ const Header = () => {
                     </>
                     :
                     <>
-                        <Link className='font-semibold my-2 lg:my-0 mx-2' to='/login'>Login</Link>
-                        <Link className='font-semibold my-2 lg:my-0 mx-2' to='/register'>Register</Link>
+                        <NavLink className='font-semibold my-2 lg:my-0 mx-auto lg:mx-2' to='/login'>Login</NavLink>
+                        <NavLink className='font-semibold my-2 lg:my-0 mx-auto lg:mx-2' to='/register'>Register</NavLink>
                     </>
             }
         </>
@@ -42,7 +43,7 @@ const Header = () => {
         <div className="navbar py-2 lg:py-4 lg:px-6 bg-accent">
             <div className="navbar-start">
                 <img className="w-10 lg:w-14 rounded-full" src={img} alt="" />
-                <Link to='/'><h2 className="font-bold normal-case pl-4 text-2xl lg:text-3xl whitespace-nowrap">Recycle Zone</h2></Link>
+                <Link to='/'><h2 className="font-bold normal-case pl-2 lg:pl-4 text-2xl lg:text-3xl whitespace-nowrap">Recycle Zone</h2></Link>
             </div>
             <div className="navbar-end">
                 <div className="hidden lg:flex items-center">
@@ -56,7 +57,7 @@ const Header = () => {
                         <div className="w-10 rounded-full">
                             {
                                 user?.photoURL ?
-                                    <img style={{ width: '40px', height: '40px' }} className='rounded-circle' title={user.displayName} src={user.photoURL} alt='' />
+                                    <img className='rounded-circle w-10 h-10' title={user.displayName} src={user.photoURL} alt='' />
                                     :
                                     <FontAwesomeIcon className='pt-2 text-2xl' icon={faUser} />
                             }

@@ -3,19 +3,33 @@ import { AuthContext } from '../../../context/AuthProvider';
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import img from '../../../assets/images/image.jpg';
+import loginImg from '../../../assets/images/login.jpg';
 import icon from '../../../assets/Logo/google.png';
 import { GoogleAuthProvider } from 'firebase/auth';
+import { useTitle } from '../../../shortComponents/Title';
+import { useEffect } from 'react';
+import Loader from '../../../shortComponents/Loader';
 
 
 const Login = () => {
-    const { logInUser, signInWithGoogle, setLoading } = useContext(AuthContext);
+    useTitle('Login');
+    const { logInUser, signInWithGoogle, loading, setLoading } = useContext(AuthContext);
     const provider = new GoogleAuthProvider();
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location?.state?.from?.pathname || '/';
 
+    useEffect(() => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false)
+        }, 1000);
+    }, [setLoading])
+
+    if (loading) {
+        return <Loader></Loader>
+    }
 
     const handleLogin = data => {
         logInUser(data.email, data.password)
@@ -24,7 +38,10 @@ const Login = () => {
                 navigate(from, { replace: true })
                 setLoading(false);
             })
-            .catch(e => toast.error(e.message))
+            .catch(e => {
+                setLoading(false);
+                toast.error(e.message)
+            })
 
     }
 
@@ -34,7 +51,10 @@ const Login = () => {
                 const user = result.user;
                 saveUser(user.displayName, user.email)
             })
-            .catch(e => toast.error(e.message))
+            .catch(e => {
+                setLoading(false);
+                toast.error(e.message)
+            })
     }
 
     const saveUser = (name, email) => {
@@ -42,7 +62,7 @@ const Login = () => {
             name,
             email
         }
-        fetch('https://recycle-zone-server-ten.vercel.app/users', {
+        fetch('http://localhost:5000/users', {
             method: 'PUT',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(user)
@@ -56,14 +76,14 @@ const Login = () => {
     }
 
     return (
-        <div className=" bg-sky-200 p-8 lg:p-20 ">
-            <div className="p-0 hero-content flex flex-col lg:flex-row justify-center items-center rounded-md">
-                <div className='w-full lg:w-3/5'>
-                    <img src={img} alt='' className="rounded-2xl" />
+        <div className=" bg-sky-200 py-16 md:py-20 lg:p-20">
+            <div className="p-0 hero-content grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 lg:gap-32 rounded-md">
+                <div className='w-3/4 lg:w-full mx-auto'>
+                    <img src={loginImg} alt='' className="rounded-2xl" />
                 </div>
-                <div className='w-full p-10 lg:w-2/5 h-[480px] flex flex-col justify-center items-center bg-base-100'>
+                <div className='w-3/4 lg:w-full mx-auto p-6 md:p-8 lg:p-10 flex flex-col justify-center items-center bg-base-100'>
                     <form onSubmit={handleSubmit(handleLogin)} className="w-full mx-auto">
-                        <h1 className="text-3xl font-bold text-center">Login now!</h1>
+                        <h1 className="text-3xl font-bold text-center">LogIn now!</h1>
                         <div className="form-control w-full">
 
                             <label className="label">
@@ -91,7 +111,7 @@ const Login = () => {
                             {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}
 
                         </div>
-                        <input value='SignUp' className='btn w-full mt-4' type="submit" />
+                        <input value='Log In' className='btn w-full mt-4' type="submit" />
                     </form>
                     <p className='text-xs text-center mt-4'>Don't have account? <Link to='/register' className='text-blue-500'>Register</Link></p>
                     <div className='mt-4 w-full'>

@@ -2,7 +2,7 @@ import React from 'react';
 import toast from 'react-hot-toast';
 
 const BookNow = ({ selectedProduct, setSelectedProduct, refetch }) => {
-    const { buyer, email, item, price, img, seller_email } = selectedProduct;
+    const { productId, buyer, email, item, price, img, seller_email } = selectedProduct;
 
 
     const handleSubmit = event => {
@@ -16,6 +16,7 @@ const BookNow = ({ selectedProduct, setSelectedProduct, refetch }) => {
         const location = form.location.value;
 
         const order = {
+            productId,
             buyer,
             email,
             item,
@@ -23,10 +24,13 @@ const BookNow = ({ selectedProduct, setSelectedProduct, refetch }) => {
             img,
             phone,
             location,
-            seller_email
+            seller_email,
+            paid: false
         }
 
-        fetch('https://recycle-zone-server-ten.vercel.app/orders', {
+        console.log('order from booknow', order)
+
+        fetch('http://localhost:5000/orders', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

@@ -4,8 +4,10 @@ import { AuthContext } from '../context/AuthProvider';
 import useAdmin from '../hooks/useAdmin';
 import useSeller from '../hooks/useSeller';
 import Header from '../pages/shared/Header/Header';
+import { useTitle } from '../shortComponents/Title';
 
 const DashboardLayout = () => {
+    useTitle('Dashboard')
     const { user } = useContext(AuthContext);
     const [isAdmin] = useAdmin(user?.email);
     const [isSeller] = useSeller(user?.email);

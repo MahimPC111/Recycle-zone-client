@@ -8,14 +8,14 @@ const AllSellers = () => {
     const { data: sellers = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch('https://recycle-zone-server-ten.vercel.app/users?role=seller')
+            const res = await fetch('http://localhost:5000/users?role=seller')
             const data = await res.json()
             return data;
         }
     })
 
     const handleDelete = (id) => {
-        fetch(`https://recycle-zone-server-ten.vercel.app/users/${id}`, {
+        fetch(`http://localhost:5000/users/${id}`, {
             method: 'DELETE',
         })
             .then(res => res.json())
@@ -29,7 +29,7 @@ const AllSellers = () => {
         const verify = {
             isVerified: true,
         }
-        fetch(`https://recycle-zone-server-ten.vercel.app/users/${id}`, {
+        fetch(`http://localhost:5000/users/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

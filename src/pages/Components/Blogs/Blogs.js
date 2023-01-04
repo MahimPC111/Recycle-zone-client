@@ -1,6 +1,24 @@
 import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import Loader from '../../../shortComponents/Loader';
+import { useTitle } from '../../../shortComponents/Title';
 
 const Blogs = () => {
+    useTitle('Blogs')
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false)
+        }, 1000);
+    }, [])
+
+    if (loading) {
+        return <Loader></Loader>
+    }
+
     return (
         <div>
             <h1 className='text-2xl md:text-3xl lg:text-4xl text-center my-4'>This is our popular blogs you should not miss.</h1>

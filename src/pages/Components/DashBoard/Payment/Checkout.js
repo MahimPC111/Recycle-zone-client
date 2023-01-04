@@ -8,10 +8,10 @@ const CheckoutForm = ({ order }) => {
     const [processing, setProcessing] = useState(false);
     const stripe = useStripe();
     const elements = useElements()
-    const { _id, price, buyer, email } = order;
+    const { _id, productId, price, buyer, email } = order;
 
     useEffect(() => {
-        fetch("https://recycle-zone-server-ten.vercel.app/create-payment-intent", {
+        fetch("http://localhost:5000/create-payment-intent", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -63,19 +63,21 @@ const CheckoutForm = ({ order }) => {
             toast.error(confirmError.message)
             return;
         }
+        // console.log('payment intent', paymentIntent)
 
         if (paymentIntent.status === "succeeded") {
             console.log('card info', card)
 
             const payment = {
                 orderId: _id,
+                productId,
                 transactionId: paymentIntent.id,
                 price,
                 buyer,
                 email,
             }
 
-            fetch('https://recycle-zone-server-ten.vercel.app/payments', {
+            fetch('http://localhost:5000/payments', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',

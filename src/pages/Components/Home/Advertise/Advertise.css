@@ -1,0 +1,14 @@
+.advertised-image {
+    transition: all 1.5s ease;
+}
+
+.advertised-image:hover {
+    transform: scale(1.4);
+}
+
+@media screen and (max-width: 572px) {
+    .advertised-image:hover {
+        transform: scale(1.2);
+    }
+
+}

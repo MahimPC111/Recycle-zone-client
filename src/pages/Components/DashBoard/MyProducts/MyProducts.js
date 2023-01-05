@@ -80,7 +80,7 @@ const MyProducts = () => {
                                     <td>{product.name}</td>
                                     <td>{product.resale_price}</td>
                                     <td>{product.status}</td>
-                                    <td><button onClick={() => handleAdvertise(product._id)} className='btn btn-sm btn-primary' disabled={product.isAdvertised}>
+                                    <td><button onClick={() => handleAdvertise(product._id)} className='btn btn-sm btn-primary' disabled={product.isAdvertised || 'sold'}>
                                         {product.isAdvertised ? 'Advertised' : 'Advertise'}
                                     </button></td>
                                     <td><button onClick={() => handleDelete(product._id)} className='btn btn-sm btn-error'>X</button></td>

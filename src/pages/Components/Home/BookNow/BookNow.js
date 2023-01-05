@@ -30,7 +30,7 @@ const BookNow = ({ selectedProduct, setSelectedProduct, refetch }) => {
 
         console.log('order from booknow', order)
 
-        fetch('http://localhost:5000/orders', {
+        fetch('https://recycle-zone-server-ten.vercel.app/orders', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

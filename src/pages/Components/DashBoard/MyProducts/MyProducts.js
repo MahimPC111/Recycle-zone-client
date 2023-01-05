@@ -10,7 +10,7 @@ const MyProducts = () => {
     const { data: products = [], isLoading, refetch } = useQuery({
         queryKey: ['orders', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/products?email=${user?.email}`)
+            const res = await fetch(`https://recycle-zone-server-ten.vercel.app/products?email=${user?.email}`)
             const data = await res.json()
             return data;
         }
@@ -21,7 +21,7 @@ const MyProducts = () => {
     }
 
     const handleDelete = (id) => {
-        fetch(`http://localhost:5000/products/${id}`, {
+        fetch(`https://recycle-zone-server-ten.vercel.app/products/${id}`, {
             method: 'DELETE',
         })
             .then(res => res.json())
@@ -35,7 +35,7 @@ const MyProducts = () => {
         const advertise = {
             isAdvertised: true,
         }
-        fetch(`http://localhost:5000/products/${id}`, {
+        fetch(`https://recycle-zone-server-ten.vercel.app/products/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

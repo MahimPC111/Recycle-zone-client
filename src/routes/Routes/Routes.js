@@ -30,7 +30,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/category/:id',
-                loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`),
+                loader: ({ params }) => fetch(`https://recycle-zone-server-ten.vercel.app/category/${params.id}`),
                 element: <Products></Products>
             },
             {
@@ -81,7 +81,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/payment/:id',
-                loader: ({ params }) => fetch(`http://localhost:5000/orders/${params.id}`),
+                loader: ({ params }) => fetch(`https://recycle-zone-server-ten.vercel.app/orders/${params.id}`),
                 element: <Payment></Payment>
             },
         ]

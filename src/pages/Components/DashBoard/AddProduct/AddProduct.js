@@ -57,7 +57,7 @@ const AddProduct = () => {
                         isAdvertised: false,
                     }
 
-                    fetch(`http://localhost:5000/products`, {
+                    fetch(`https://recycle-zone-server-ten.vercel.app/products`, {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',

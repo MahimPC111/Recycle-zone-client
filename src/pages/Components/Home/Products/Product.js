@@ -59,7 +59,7 @@ const Product = ({ product, setSelectedProduct, currentUser }) => {
             </figure>
             <div className="card-body p-5 md:p-6 lg:p-8">
                 <h2 className="card-title">{name}</h2>
-                <p>Original price: $<del>{original_price}</del></p>
+                <p>Original price: <del>{original_price} BDT</del></p>
                 <p>Resale price: {resale_price} BDT</p>
                 <p>Usages time: {used_time}</p>
                 <p className='flex items-center'>Seller name: {seller_name}

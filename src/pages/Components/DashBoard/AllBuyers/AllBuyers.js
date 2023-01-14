@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import toast from 'react-hot-toast';
+import "animate.css/animate.min.css";
 
 const AllBuyers = () => {
 
@@ -25,8 +26,8 @@ const AllBuyers = () => {
     }
 
     return (
-        <div className="overflow-x-auto">
-            <table className="table w-full">
+        <div className="overflow-x-auto min-h-screen">
+            <table className="table w-full animate__animated animate__fadeInUpBig">
                 <thead>
                     <tr>
                         <th></th>

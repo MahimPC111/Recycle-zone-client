@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../../context/AuthProvider';
 import Loader from '../../../../shortComponents/Loader';
+import "animate.css/animate.min.css";
 
 const MyBuyers = () => {
     const { user } = useContext(AuthContext);
@@ -21,8 +22,8 @@ const MyBuyers = () => {
     }
 
     return (
-        <div className="overflow-x-auto">
-            <table className="table w-full">
+        <div className="overflow-x-auto min-h-screen">
+            <table className="table w-full animate__animated animate__fadeInUpBig">
                 <thead>
                     {
                         buyers.length ?

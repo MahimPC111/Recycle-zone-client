@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../../../context/AuthProvider';
 import Loader from '../../../../shortComponents/Loader';
+import "animate.css/animate.min.css";
 
 const MyProducts = () => {
     const { user } = useContext(AuthContext);
@@ -50,8 +51,8 @@ const MyProducts = () => {
     }
 
     return (
-        <div className="overflow-x-auto">
-            <table className="table w-full">
+        <div className="overflow-x-auto min-h-screen">
+            <table className="table w-full animate__animated animate__fadeInUpBig">
                 <thead>
                     {
                         products.length ?
@@ -80,10 +81,10 @@ const MyProducts = () => {
                                     <td>{product.name}</td>
                                     <td>{product.resale_price}</td>
                                     <td>{product.status}</td>
-                                    <td><button onClick={() => handleAdvertise(product._id)} className='btn btn-sm btn-primary' disabled={product.isAdvertised || 'sold'}>
+                                    <td><button onClick={() => handleAdvertise(product._id)} className='btn btn-sm btn-primary' disabled={product.isAdvertised || product.status === 'sold'}>
                                         {product.isAdvertised ? 'Advertised' : 'Advertise'}
                                     </button></td>
-                                    <td><button onClick={() => handleDelete(product._id)} className='btn btn-sm btn-error'>X</button></td>
+                                    <td><button onClick={() => handleDelete(product._id)} className='btn btn-sm btn-error' disabled={product.status === 'sold'}>X</button></td>
                                 </tr>
                             )
                             :

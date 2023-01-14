@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import toast from 'react-hot-toast';
 import Loader from '../../../shortComponents/Loader';
 import { useTitle } from '../../../shortComponents/Title';
+import "animate.css/animate.min.css";
 
 const Register = () => {
     useTitle('Register');
@@ -81,7 +82,7 @@ const Register = () => {
 
     return (
         <div className=" bg-sky-200 py-16 md:py-20 lg:p-20">
-            <div className="p-0 hero-content grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 lg:gap-32 rounded-md">
+            <div className="p-0 hero-content grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 lg:gap-32 rounded-md animate__animated animate__fadeIn">
                 <div className='w-11/12 lg:w-full mx-auto p-10 flex flex-col justify-center items-center bg-base-100'>
                     <form onSubmit={handleSubmit(handleRegister)} className="w-full mx-auto">
                         <h1 className="text-3xl font-bold text-center">Register now!</h1>

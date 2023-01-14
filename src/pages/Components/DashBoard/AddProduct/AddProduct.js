@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../../context/AuthProvider';
 import Loader from '../../../../shortComponents/Loader';
+import "animate.css/animate.min.css";
 
 const AddProduct = () => {
     const { user } = useContext(AuthContext)
@@ -76,7 +77,7 @@ const AddProduct = () => {
     }
     return (
         <div>
-            <div className='w-full lg:w-3/4 mx-auto py-10'>
+            <div className='w-full lg:w-3/4 mx-auto py-10 animate__animated animate__fadeInUpBig'>
                 <h3 className='text-xl md:text-2xl lg:text-4xl font-bold text-center'>Add a new product</h3>
                 <form onSubmit={handleSubmit(handleAddDoctor)}>
 

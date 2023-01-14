@@ -1,14 +1,38 @@
-.advertised-image {
-    transition: all 1.5s ease;
+.advertised-card {
+    position: relative;
+    box-shadow: 0 0 5px black;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
-.advertised-image:hover {
-    transform: scale(1.4);
+.advertised-card img {
+    border-radius: 5px;
 }
 
-@media screen and (max-width: 572px) {
-    .advertised-image:hover {
-        transform: scale(1.2);
-    }
+.advertised-card-body {
+    background: rgb(27, 27, 27, 0.5);
+    color: white;
+    position: absolute;
+    bottom: 0px;
+    height: 50px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 0 0 5px 5px;
+    transition: all 1s;
+}
 
+.advertised-card:hover .advertised-card-body {
+    height: 130px;
+    background: rgb(36, 36, 36, 0.8);
+}
+
+.advertised-card p {
+    visibility: hidden;
+    opacity: 0;
+    line-height: normal;
+}
+
+.advertised-card:hover p {
+    visibility: visible;
+    opacity: 1;
 }

@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../../context/AuthProvider';
 import Loader from '../../../../shortComponents/Loader';
+import "animate.css/animate.min.css";
 
 const MyOrders = () => {
     const { user } = useContext(AuthContext);
@@ -21,8 +22,8 @@ const MyOrders = () => {
     }
 
     return (
-        <div className="overflow-x-auto">
-            <table className="table w-full">
+        <div className="overflow-x-auto min-h-screen">
+            <table className="table w-full animate__animated animate__fadeInUpBig">
                 <thead>
                     {
                         orders.length ?

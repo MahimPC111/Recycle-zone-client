@@ -9,6 +9,7 @@ import { GoogleAuthProvider } from 'firebase/auth';
 import { useTitle } from '../../../shortComponents/Title';
 import { useEffect } from 'react';
 import Loader from '../../../shortComponents/Loader';
+import "animate.css/animate.min.css";
 
 
 const Login = () => {
@@ -77,7 +78,7 @@ const Login = () => {
 
     return (
         <div className=" bg-sky-200 py-16 md:py-20 lg:p-20">
-            <div className="p-0 hero-content grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 lg:gap-32 rounded-md">
+            <div className="p-0 hero-content grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 lg:gap-32 rounded-md animate__animated animate__fadeIn">
                 <div className='w-3/4 lg:w-full mx-auto'>
                     <img src={loginImg} alt='' className="rounded-2xl" />
                 </div>

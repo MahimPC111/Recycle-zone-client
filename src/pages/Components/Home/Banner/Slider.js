@@ -29,7 +29,7 @@ export default function Slider() {
                 gradientColor={[140, 85, 180]}
                 style={{ fontSize: '25px', color: 'black' }}
             >
-                <FiBox style={{ marginLeft: '50px', color: 'blue' }} /> Recycle products reduces your costs.  <FiBox style={{ marginLeft: '50px', color: 'blue' }} />Second hand products save your money.  <FiBox style={{ marginLeft: '50px', color: 'blue' }} />Please order now to enjoy our services.
+                <FiBox style={{ marginLeft: '50px', color: 'blue' }} /> Our upcoming products!  <FiBox style={{ marginLeft: '50px', color: 'blue' }} />Our upcoming products!  <FiBox style={{ marginLeft: '50px', color: 'blue' }} />Our upcoming products!   <FiBox style={{ marginLeft: '50px', color: 'blue' }} />Our upcoming products!
             </Marquee>
             <Swiper
                 effect={"coverflow"}

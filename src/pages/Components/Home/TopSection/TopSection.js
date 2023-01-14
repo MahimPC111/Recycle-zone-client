@@ -22,7 +22,7 @@ const TopSection = () => {
                     </div>
                 </h1>
             </div>
-            <div className='mx-auto w-full animate__animated animate__flipInX'>
+            <div className='mx-auto md:w-3/4 lg:w-full animate__animated animate__flipInX'>
                 <img src={img} alt="" />
             </div>
         </div>

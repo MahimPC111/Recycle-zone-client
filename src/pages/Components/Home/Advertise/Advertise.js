@@ -24,7 +24,7 @@ const Advertise = () => {
                         {
                             products.map((product, i) =>
                                 <div key={i} className='mx-auto'>
-                                    <div className="advertised-card w-72 sm:w-80 lg:w-96 cursor-pointer">
+                                    <div className="advertised-card w-60 md:w-72 sm:w-80 lg:w-96 cursor-pointer">
                                         <figure><img src={product.img} alt="Mobile" /></figure>
                                         <div className="advertised-card-body">
                                             <h2 className="card-title">{product.name}</h2>

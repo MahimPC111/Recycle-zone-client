@@ -22,7 +22,7 @@ export default function Slider() {
     const sliderImage = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10];
 
     return (
-        <div className="slider-section">
+        <div className="my-20 md:my-32 lg:my-48">
             <Marquee
                 speed={100}
                 pauseOnHover={true}

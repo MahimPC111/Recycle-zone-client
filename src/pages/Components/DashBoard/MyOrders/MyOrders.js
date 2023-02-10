@@ -31,8 +31,8 @@ const MyOrders = () => {
                                 <th></th>
                                 <th>Image</th>
                                 <th>Name</th>
-                                <th>Price</th>
-                                <th>Payment</th>
+                                <th align='center'>Price</th>
+                                <th align='center'>Payment</th>
                             </tr>
                             :
                             <h2 className='text-xl md:text-2xl lg:text-4xl text-center font-semibold my-4'>You haven't placed any order yet</h2>
@@ -48,8 +48,8 @@ const MyOrders = () => {
                                         <img className='w-12 h-12' src={order.img} alt='' />
                                     </td>
                                     <td>{order.item}</td>
-                                    <td>{order.price}</td>
-                                    <td>
+                                    <td align='center'>{order.price}</td>
+                                    <td align='center'>
                                         {
                                             order.paid ?
                                                 <span className='text-slate-300 font-bold'>Paid</span>

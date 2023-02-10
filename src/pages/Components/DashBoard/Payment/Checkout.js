@@ -99,13 +99,20 @@ const CheckoutForm = ({ order }) => {
         <>
             <form onSubmit={handleSubmit}>
                 <CardElement
+                    style={{
+                        display: 'flex'
+                    }}
                     options={{
                         style: {
                             base: {
+                                ':-webkit-autofill': {
+                                    color: '#fce883',
+                                },
                                 fontSize: '16px',
-                                color: '#424770',
+                                fontSmoothing: 'antialiased',
+                                color: 'black',
                                 '::placeholder': {
-                                    color: '#aab7c4',
+                                    color: 'grey',
                                 },
                             },
                             invalid: {
@@ -114,9 +121,11 @@ const CheckoutForm = ({ order }) => {
                         },
                     }}
                 />
-                <button className='btn btn-sm mt-6' type="submit" disabled={!stripe || !clientSecret || processing}>
-                    Pay
-                </button>
+                <div className='flex justify-center'>
+                    <button className='btn btn-sm mt-4 md:mt-6 lg:mt-8 w-1/2' type="submit" disabled={!stripe || !clientSecret || processing}>
+                        Pay
+                    </button>
+                </div>
             </form>
             {
                 transactionId && <p>Your transaction ID is: <span className='font-bold'>{transactionId}</span></p>

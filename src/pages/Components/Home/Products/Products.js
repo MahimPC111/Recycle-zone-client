@@ -1,13 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
+import { useEffect } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../../../context/AuthProvider';
+import Loader from '../../../../shortComponents/Loader';
 import { useTitle } from '../../../../shortComponents/Title';
 import BookNow from '../BookNow/BookNow';
 import Product from './Product';
 
 const Products = () => {
     useTitle('Product Details')
+    const [loading, setLoading] = useState(false);
     const products = useLoaderData();
     const { user } = useContext(AuthContext);
     const [selectedProduct, setSelectedProduct] = useState(null);
@@ -21,6 +24,17 @@ const Products = () => {
             return data;
         }
     })
+
+    useEffect(() => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false)
+        }, 1000);
+    }, [])
+
+    if (loading) {
+        return <Loader></Loader>
+    }
 
 
     return (
